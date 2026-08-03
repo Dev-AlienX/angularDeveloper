@@ -1,13 +1,39 @@
 const root = document.documentElement;
 const themeButton = document.querySelector('.theme-toggle');
-const savedTheme = localStorage.getItem('portfolio-theme');
+const browserTheme = window.matchMedia('(prefers-color-scheme: dark)');
 
-if (savedTheme === 'dark') root.dataset.theme = 'dark';
+const applyTheme = (theme) => {
+  root.dataset.theme = theme;
+  root.style.colorScheme = theme;
+  const nextTheme = theme === 'dark' ? 'light' : 'dark';
+  themeButton?.setAttribute('aria-label', `Switch to ${nextTheme} mode`);
+  themeButton?.setAttribute('title', `Switch to ${nextTheme} mode`);
+  themeButton?.setAttribute('aria-pressed', String(theme === 'dark'));
+};
+
+let savedTheme = null;
+try {
+  savedTheme = localStorage.getItem('portfolio-theme');
+} catch {}
+
+applyTheme(savedTheme === 'dark' || savedTheme === 'light'
+  ? savedTheme
+  : browserTheme.matches ? 'dark' : 'light');
+
+browserTheme.addEventListener('change', (event) => {
+  let hasManualPreference = false;
+  try {
+    hasManualPreference = localStorage.getItem('portfolio-theme') !== null;
+  } catch {}
+  if (!hasManualPreference) applyTheme(event.matches ? 'dark' : 'light');
+});
 
 themeButton?.addEventListener('click', () => {
   const nextTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
-  root.dataset.theme = nextTheme === 'dark' ? 'dark' : '';
-  localStorage.setItem('portfolio-theme', nextTheme);
+  applyTheme(nextTheme);
+  try {
+    localStorage.setItem('portfolio-theme', nextTheme);
+  } catch {}
 });
 
 const revealObserver = new IntersectionObserver((entries) => {

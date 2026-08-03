@@ -12,6 +12,18 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="__SITE_ORIGIN__/og.png" />
     <title>Ganesh Vishwakarma — Senior Angular Developer</title>
+    <script>
+      (() => {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        let theme = prefersDark ? 'dark' : 'light';
+        try {
+          const savedTheme = localStorage.getItem('portfolio-theme');
+          if (savedTheme === 'dark' || savedTheme === 'light') theme = savedTheme;
+        } catch {}
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
