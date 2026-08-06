@@ -1,19 +1,31 @@
-import { cp, mkdir, rm, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
 const root = resolve(import.meta.dirname, '..');
 const dist = resolve(root, 'dist');
+const pages = resolve(root, 'docs');
+const githubPagesOrigin = 'https://dev-alienx.github.io';
 
 await rm(dist, { recursive: true, force: true });
+await rm(pages, { recursive: true, force: true });
 await mkdir(resolve(dist, 'static'), { recursive: true });
 await mkdir(resolve(dist, 'server'), { recursive: true });
 await mkdir(resolve(dist, '.openai'), { recursive: true });
+await mkdir(pages, { recursive: true });
 
 for (const file of ['index.html', 'styles.css', 'script.js']) {
   await cp(resolve(root, file), resolve(dist, 'static', file));
 }
 await cp(resolve(root, 'public', 'og.png'), resolve(dist, 'static', 'og.png'));
 await cp(resolve(root, '.openai', 'hosting.json'), resolve(dist, '.openai', 'hosting.json'));
+
+const pagesHtml = (await readFile(resolve(root, 'index.html'), 'utf8'))
+  .replaceAll('__SITE_ORIGIN__', githubPagesOrigin);
+await writeFile(resolve(pages, 'index.html'), pagesHtml);
+await cp(resolve(root, 'styles.css'), resolve(pages, 'styles.css'));
+await cp(resolve(root, 'script.js'), resolve(pages, 'script.js'));
+await cp(resolve(root, 'public', 'og.png'), resolve(pages, 'og.png'));
+await writeFile(resolve(pages, '.nojekyll'), '');
 
 const worker = `export default {
   async fetch(request, env) {
@@ -32,4 +44,4 @@ const worker = `export default {
 };\n`;
 
 await writeFile(resolve(dist, 'server', 'index.js'), worker);
-console.log('Portfolio built successfully.');
+console.log('Portfolio and GitHub Pages files built successfully.');
