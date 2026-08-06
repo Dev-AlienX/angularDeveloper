@@ -7,7 +7,6 @@ const pages = resolve(root, 'docs');
 const githubPagesOrigin = 'https://dev-alienx.github.io/seniorAngularDeveloper';
 
 await rm(dist, { recursive: true, force: true });
-await rm(pages, { recursive: true, force: true });
 await mkdir(resolve(dist, 'static'), { recursive: true });
 await mkdir(resolve(dist, 'server'), { recursive: true });
 await mkdir(resolve(dist, '.openai'), { recursive: true });

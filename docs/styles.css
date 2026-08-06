@@ -39,6 +39,9 @@ button { color: inherit; font: inherit; }
 .header-actions { justify-self: end; display: flex; align-items: center; gap: 12px; }
 .theme-toggle { width: 42px; height: 42px; border: 1px solid var(--line); background: transparent; border-radius: 50%; cursor: pointer; font-size: 1.15rem; }
 .theme-toggle:hover { background: var(--card); }
+.resume-pill { background: var(--accent); color: #fff; padding: 12px 18px; border: 1px solid var(--accent); border-radius: 999px; font: 500 .75rem "DM Mono", monospace; text-transform: uppercase; transition: transform .25s ease, box-shadow .25s ease; }
+.resume-pill:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(255, 77, 46, .24); }
+.resume-pill span { margin-left: 8px; font-size: .9rem; }
 .contact-pill { background: var(--ink); color: var(--paper); padding: 12px 18px; border-radius: 999px; font: 500 .75rem "DM Mono", monospace; text-transform: uppercase; }
 .contact-pill span { margin-left: 8px; }
 
@@ -136,6 +139,9 @@ footer { width: min(calc(100% - 48px), var(--max)); min-height: 110px; margin: 0
   .site-header, .section-shell, footer { width: min(calc(100% - 32px), var(--max)); }
   .site-header { height: 78px; }
   .contact-pill { display: none; }
+  .header-actions { gap: 8px; }
+  .theme-toggle { width: 38px; height: 38px; }
+  .resume-pill { padding: 10px 13px; font-size: .65rem; }
   .hero { min-height: calc(100svh - 78px); padding-left: 16px; padding-right: 16px; }
   .hero h1 { font-size: clamp(3rem, 15vw, 4.4rem); }
   .hero-bottom { align-items: center; }
