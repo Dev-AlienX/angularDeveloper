@@ -1,16 +1,16 @@
 [
   {
-    "name": "Mobile Shop AngularJs",
+    "name": "Mobile Shop AngularJS",
     "link": "https://dev-alienx.github.io/mobile_shop_AngularJs/#!/shop",
-    "description": "This project was created while I was learning AngularJS for the first time and experimenting with that knowledge.",
+    "description": "An early AngularJS learning project exploring controllers, directives, and $scope through a mobile storefront.",
     "keywords": ["$scope", "directive", "controller"],
     "image": "docs/img/mobile_shop_AngularJs.webp"
   },
   {
     "name": "Mobile Shop NG5",
     "link": "https://dev-alienx.github.io/mobile_shop_NG5",
-    "description": "This project was created while I was learning AngularJS for the first time and experimenting with that knowledge.",
-    "keywords": ["$scope", "directive", "controller"],
+    "description": "A mobile storefront created while learning Angular 5 and its component-based development model.",
+    "keywords": ["Angular 5", "TypeScript", "Components"],
     "image": "docs/img/mobile_shop_NG5.webp"
   },
   {
