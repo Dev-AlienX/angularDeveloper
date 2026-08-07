@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Mobile Shop AngularJs",
+    "link": "https://dev-alienx.github.io/mobile_shop_AngularJs/#!/shop",
+    "description": "This project was created while I was learning AngularJS for the first time and experimenting with that knowledge.",
+    "keywords": ["$scope", "directive", "controller"],
+    "image": "docs/img/mobile_shop_AngularJs.webp"
+  },
+  {
+    "name": "Mobile Shop NG5",
+    "link": "https://dev-alienx.github.io/mobile_shop_NG5",
+    "description": "This project was created while I was learning AngularJS for the first time and experimenting with that knowledge.",
+    "keywords": ["$scope", "directive", "controller"],
+    "image": "docs/img/mobile_shop_NG5.webp"
+  },
+  {
+    "name": "The Unsubscribables",
+    "link": "https://dev-alienx.github.io/theUnsubscribables",
+    "description": "An Angular playground for Observables, Subjects, BehaviorSubject, ReplaySubject, operators, and Playwright end-to-end testing.",
+    "keywords": ["Angular", "RxJS", "Playwright"],
+    "image": "docs/img/theUnsubscribables.webp"
+  },
+  {
+    "name": "Still Not Shiny",
+    "link": "https://dev-alienx.github.io/stillNotShiny",
+    "description": "A Pokémon Pokédex built with Angular 22, Signals, standalone components, lazy routes, guards, resolvers, and secure API handling.",
+    "keywords": ["Angular 22", "Signals", "REST API"],
+    "image": "docs/img/stillNotShiny.webp"
+  }
+]

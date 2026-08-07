@@ -47,6 +47,94 @@ const revealObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
 
+const projectList = document.querySelector('#project-list');
+const projectSources = ['json/projects.json', 'docs/json/projects.json'];
+
+const resolveProjectImage = (imagePath, sourcePath) => {
+  if (/^(https?:)?\/\//i.test(imagePath) || imagePath.startsWith('data:')) return imagePath;
+  return sourcePath.startsWith('docs/')
+    ? imagePath.replace(/^\/+/, '')
+    : imagePath.replace(/^docs\//, '').replace(/^\/+/, '');
+};
+
+const createProjectCard = (project, index, sourcePath) => {
+  const card = document.createElement('a');
+  card.className = 'project-card reveal';
+  card.href = project.link;
+  card.target = '_blank';
+  card.rel = 'noreferrer';
+  card.setAttribute('aria-label', `Open ${project.name} project`);
+
+  const visual = document.createElement('div');
+  visual.className = 'project-visual';
+
+  const image = document.createElement('img');
+  image.src = resolveProjectImage(project.image, sourcePath);
+  image.alt = `${project.name} project preview`;
+  image.loading = index < 2 ? 'eager' : 'lazy';
+  image.decoding = 'async';
+  image.addEventListener('error', () => image.remove());
+
+  const number = document.createElement('span');
+  number.className = 'project-number';
+  number.textContent = String(index + 1).padStart(2, '0');
+  visual.append(image, number);
+
+  const main = document.createElement('div');
+  main.className = 'project-main';
+
+  const titleRow = document.createElement('div');
+  titleRow.className = 'project-title-row';
+
+  const title = document.createElement('h3');
+  title.textContent = project.name;
+  const arrow = document.createElement('span');
+  arrow.className = 'project-arrow';
+  arrow.setAttribute('aria-hidden', 'true');
+  arrow.textContent = '↗';
+  titleRow.append(title, arrow);
+
+  const description = document.createElement('p');
+  description.textContent = project.description;
+
+  const tags = document.createElement('div');
+  tags.className = 'tags';
+  (project.keywords ?? []).forEach((keyword) => {
+    const tag = document.createElement('span');
+    tag.textContent = keyword;
+    tags.append(tag);
+  });
+
+  main.append(titleRow, description, tags);
+  card.append(visual, main);
+  return card;
+};
+
+const loadProjects = async () => {
+  if (!projectList) return;
+
+  for (const sourcePath of projectSources) {
+    try {
+      const response = await fetch(sourcePath);
+      if (!response.ok) continue;
+      const projects = await response.json();
+      if (!Array.isArray(projects) || projects.length === 0) continue;
+
+      projectList.replaceChildren();
+      projects.forEach((project, index) => {
+        const card = createProjectCard(project, index, sourcePath);
+        projectList.append(card);
+        revealObserver.observe(card);
+      });
+      return;
+    } catch {}
+  }
+
+  projectList.innerHTML = '<p class="projects-error">Project archive is temporarily unavailable.</p>';
+};
+
+loadProjects();
+
 const copyButton = document.querySelector('.copy-email');
 const toast = document.querySelector('.toast');
 copyButton?.addEventListener('click', async () => {

@@ -16,6 +16,8 @@ for (const file of ['index.html', 'styles.css', 'script.js']) {
   await cp(resolve(root, file), resolve(dist, 'static', file));
 }
 await cp(resolve(root, 'public', 'og.png'), resolve(dist, 'static', 'og.png'));
+await cp(resolve(root, 'docs', 'json'), resolve(dist, 'static', 'json'), { recursive: true });
+await cp(resolve(root, 'docs', 'img'), resolve(dist, 'static', 'img'), { recursive: true });
 await cp(resolve(root, '.openai', 'hosting.json'), resolve(dist, '.openai', 'hosting.json'));
 
 const pagesHtml = (await readFile(resolve(root, 'index.html'), 'utf8'))

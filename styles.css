@@ -86,16 +86,23 @@ button { color: inherit; font: inherit; }
 .compact-role .role-copy p { color: var(--muted); font-size: .95rem; }
 
 .projects-heading { margin-bottom: 70px; }
-.project-list { border-top: 1px solid var(--line); }
-.project-card { display: grid; grid-template-columns: 70px 1fr 70px; gap: 30px; padding: 46px 0; border-bottom: 1px solid var(--line); transition: padding .3s ease, background .3s ease; }
-.project-card:hover { padding-left: 22px; padding-right: 22px; background: var(--card); }
-.project-number { font: 400 .72rem "DM Mono", monospace; color: var(--accent); padding-top: 8px; }
-.project-main h3 { font-size: clamp(2rem, 3.6vw, 4rem); letter-spacing: -.055em; margin: 0 0 16px; font-weight: 500; }
-.project-main p { color: var(--muted); line-height: 1.6; max-width: 760px; margin: 0; }
+.project-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 430px), 1fr)); gap: 1px; border: 1px solid var(--line); background: var(--line); }
+.project-card { min-width: 0; display: flex; flex-direction: column; background: var(--paper); overflow: hidden; transition: background .3s ease; }
+.project-card:hover { background: var(--card); }
+.project-visual { position: relative; aspect-ratio: 3 / 2; overflow: hidden; background: var(--card); border-bottom: 1px solid var(--line); }
+.project-visual img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .45s ease, filter .45s ease; }
+.project-card:hover .project-visual img { transform: scale(1.025); filter: saturate(1.08); }
+.project-number { position: absolute; top: 18px; left: 18px; z-index: 1; padding: 7px 10px; border-radius: 999px; background: var(--paper); color: var(--accent); font: 500 .68rem "DM Mono", monospace; box-shadow: 0 4px 20px rgba(0,0,0,.12); }
+.project-main { flex: 1; padding: 30px; display: flex; flex-direction: column; }
+.project-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+.project-main h3 { font-size: clamp(1.8rem, 3vw, 3rem); line-height: 1; letter-spacing: -.055em; margin: 0 0 18px; font-weight: 500; }
+.project-main p { color: var(--muted); line-height: 1.65; margin: 0; }
 .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
 .tags span { border: 1px solid var(--line); border-radius: 999px; padding: 7px 11px; font: 400 .65rem "DM Mono", monospace; text-transform: uppercase; }
-.project-arrow { justify-self: end; font-size: 2.4rem; font-weight: 300; transition: transform .3s ease; }
+.project-arrow { flex: 0 0 auto; font-size: 2rem; line-height: 1; font-weight: 300; transition: transform .3s ease; }
 .project-card:hover .project-arrow { transform: translate(6px, -6px); }
+.projects-loading, .projects-error { grid-column: 1 / -1; margin: 0; padding: 44px 30px; background: var(--paper); color: var(--muted); font: 400 .72rem "DM Mono", monospace; text-transform: uppercase; letter-spacing: .06em; }
+.projects-error { color: var(--accent); }
 
 .skills-layout { display: grid; grid-template-columns: .95fr 1.25fr; gap: 100px; }
 .skills-copy { position: sticky; top: 40px; align-self: start; }
@@ -154,8 +161,8 @@ footer { width: min(calc(100% - 48px), var(--max)); min-height: 110px; margin: 0
   .metric { min-height: 210px; }
   .role { grid-template-columns: 36px 1fr; gap: 18px; padding: 38px 0; }
   .role-copy { grid-column: 1 / -1; }
-  .project-card { grid-template-columns: 36px 1fr; gap: 16px; }
-  .project-arrow { grid-column: 2; justify-self: start; }
+  .project-main { padding: 24px 20px; }
+  .project-number { top: 12px; left: 12px; }
   .skill-group { grid-template-columns: 1fr; gap: 12px; }
   .contact-orbit { width: 360px; height: 360px; }
   footer { padding: 28px 0; flex-direction: column; align-items: flex-start; }
