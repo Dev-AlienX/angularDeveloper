@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 const root = resolve(import.meta.dirname, '..');
 const dist = resolve(root, 'dist');
 const pages = resolve(root, 'docs');
-const githubPagesOrigin = 'https://dev-alienx.github.io/seniorAngularDeveloper';
+const githubPagesOrigin = 'https://dev-alienx.github.io/angularDeveloper';
 
 await rm(dist, { recursive: true, force: true });
 await mkdir(resolve(dist, 'static'), { recursive: true });
